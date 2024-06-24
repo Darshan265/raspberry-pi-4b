@@ -1,0 +1,51 @@
+Steps to get started
+
+1. flash os into sd card and insert it in rpi
+note username and password
+2. to determine ip address
+ $ping raspberrypi.local
+while ! ping raspberrypi.local; do echo "Retrying..."; sleep 5; done
+Reply from 10.0.0.223: bytes=32 time=1135ms TTL=64
+10.0.0.223 -ip
+
+3.ssh to rpi
+ssh <username>@<ip>
+e.g. ssh pi@10.0.0.223
+
+
+root@raspberrypi:/home/pi# cat get_started.sh
+#!/bin/bash
+
+# Step 4: Update firmware
+echo "Updating firmware..."
+sudo rpi-update -y
+sleep 3
+
+# Step 5: Update the list of available packages
+echo "Updating package list..."
+sudo apt update
+sleep 3
+
+# Step 6: See list of updated packages
+echo "Listing upgradable packages..."
+sudo apt list --upgradable
+sleep 3
+
+# Step 7: Upgrade all installed packages to their latest versions
+echo "Upgrading all packages..."
+sudo apt full-upgrade -y
+sleep 3
+
+# Step 8: Change Raspberry Pi configurations (specifically enable VNC server)
+echo "Configuring Raspberry Pi settings..."
+sudo raspi-config nonint do_vnc 0
+sleep 3
+
+# Step 9: Install xrdp - remote desktop protocol
+echo "Installing xrdp..."
+sudo apt install xrdp -y
+sleep 3
+
+# Step 10: Reboot the system
+echo "Rebooting system..."
+sudo init 6
