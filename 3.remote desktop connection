@@ -1,0 +1,44 @@
+To enable VNC (Virtual Network Computing) on a Raspberry Pi and a laptop, follow these steps. These instructions will guide you through setting up VNC on both devices so you can remotely access the Raspberry Pi from the laptop.
+# On the Raspberry Pi
+1. Ensure Your Raspberry Pi is Updated
+     - Open a terminal on your Raspberry Pi and run the following commands to update your system:
+     $sudo apt update
+     $sudo apt upgrade
+     
+2. Enable VNC Server
+     - You can enable the VNC server through the Raspberry Pi Configuration tool:
+     - Open the Raspberry Pi Configuration tool from the desktop: `Menu` -> `Preferences` -> `Raspberry Pi Configuration`.
+     - Navigate to the `Interfaces` tab.
+     - Enable `VNC`.
+     
+    - Alternatively, you can enable VNC via the terminal:
+     $sudo raspi-config
+    - Use the arrow keys to navigate to `Interfacing Options`.
+    - Select `VNC` and choose `Yes` to enable it.
+
+3. Install RealVNC Server (if not already installed)
+     - The RealVNC server is typically pre-installed on recent versions of Raspberry Pi OS. If it is not installed, use the following command:
+     $sudo apt install realvnc-vnc-server
+     
+4. Set Up VNC Server
+     - After enabling VNC, the VNC Server should start automatically. You can check its status with:
+     $sudo systemctl status vncserver-x11-serviced
+     
+5. Configure VNC Server (Optional)
+   - To access VNC Server settings, click the VNC icon in the taskbar or use:
+     $vncserver-x11
+     
+# On the Laptop
+1. Install VNC Viewer
+   - Download and install the VNC Viewer from the RealVNC website: [RealVNC Viewer](https://www.realvnc.com/en/connect/download/viewer/).
+   - Install the VNC Viewer by following the on-screen instructions for your operating system.
+2. Connect to the Raspberry Pi
+   - Open VNC Viewer on your laptop.
+   - In the address bar, enter the IP address of your Raspberry Pi (you can find the IP address using the command `hostname -I` on your Raspberry Pi).
+   - Press Enter.
+   - When prompted, enter the username and password for your Raspberry Pi. By default, the username is `pi` and the password is `raspberry` (unless you have changed it).
+
+# Summary
+- Raspberry Pi: Update system, enable VNC server via Raspberry Pi Configuration or terminal, install RealVNC server (if needed), configure server.
+- Laptop: Install VNC Viewer, connect to Raspberry Pi using its IP address, and enter credentials.
+After following these steps, you should be able to remotely access your Raspberry Pi's desktop environment from your laptop using VNC.
